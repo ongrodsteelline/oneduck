@@ -1,0 +1,122 @@
+.pagination{
+    align-items: center;
+
+    &__link{
+        border: 1px solid @litegrey;
+        font-family: @font_bold;
+        font-size: 18px;
+        line-height: 18px;
+        color: @grey;
+        padding: 10px 15px;
+
+        @media screen and (max-width: @media_mobile){
+            padding: 10px 12px;
+        }
+
+        &:hover{
+            color: @black;
+            background-color: transparent;
+            border-color: @litegrey;
+        }
+        &:focus {
+            box-shadow: none;
+        }
+    }
+    &__item:first-of-type{
+        margin-left: 20px;
+
+        @media screen and (max-width: @media_mobile){
+            margin-left: 0;
+        }
+
+        .page-link{
+            border-radius: 4px 0 0 4px;
+        }
+    }
+    &__item:last-child{
+        .page-link{
+            border-radius: 0 4px 4px 0;
+        }
+    }
+    &__item_dis{
+        @media screen and (max-width: @media_mobile_sm){
+            display: none;
+        }
+    }
+    &__item.active{
+        width: 40px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: @orange;
+        border-radius: 4px;
+        overflow: hidden;
+
+        .pagination__link{
+            background-color: @orange;
+            color: white;
+            border-color: transparent;
+            border-radius: 4px;
+            margin-left: 0;
+            z-index: 0;
+        }
+    }
+    &__item.active + &__item{
+        .pagination__link{
+            margin-left: 0;
+        }
+    }
+    &__wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 50px;
+        margin-bottom: 55px;
+
+        div{
+            color: @black;
+            font-family: @font_reg;
+            font-size: 16px;
+            line-height: 16px;
+
+            select{
+                width: 68px;
+                height: 40px;
+                background-color: @white;
+                background-image: url(../../../assets/img/main/pagination/chevron-down.svg);
+                background-repeat: no-repeat;
+                background-position: right 5px center;
+                border: 1px solid @litegrey;
+                border-radius: 4px;
+                color: @black;
+                font-family: @font_reg;
+                font-size: 16px;
+                line-height: 16px;
+                outline: none;
+                padding: 5px 5px 5px 10px;
+                margin-left: 25px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+
+                @media screen and (max-width: @media_mobile){
+                    margin-left: 0;
+                }
+            }
+            span{
+                @media screen and (max-width: @media_mobile){
+                    display: none;
+                }
+            }
+        }
+    }
+
+    & > span{
+        margin-right: 25px;
+
+        @media screen and (max-width: @media_mobile){
+            display: none;
+        }
+    }
+}

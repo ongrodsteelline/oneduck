@@ -1,0 +1,15 @@
+@media (min-width: 1700px) {
+    .shopPay__wrap {
+        flex-wrap: nowrap;
+    }
+}
+.contacts #map iframe {
+    width: 100%;
+    min-height: 330px;
+}
+@media (max-width: 640px) {
+    .form input.form__btn {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}

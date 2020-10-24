@@ -1,0 +1,65 @@
+.switch {
+	width: 46px;
+	height: 26px;
+	position: relative;
+	display: inline-block;
+	margin-bottom: 0;
+
+    &-wrap{
+        display: flex;
+        align-items: center;
+        margin-top: 60px;
+    }
+    input {
+		opacity: 0;
+		width: 0;
+        height: 0;
+        
+        &:checked ~ .switch__text{
+            color: @white;
+        }
+        &:checked ~ .switch__btn{
+            border-color: @litegrey;
+        }
+        &:checked ~ .switch__btn:before {
+            background-color: @yellow;
+            transform: translateX(18px);
+        }
+    }
+    &__text{
+        width: max-content;
+        position: absolute;
+        top: 52%;
+        left: 60px;
+        transform: translateY(-50%);
+        color: fade(@white, 60%);
+        font-family: @font_reg;
+        font-size: 16px;
+        line-height: 16px;
+    }
+    &__btn {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 24px;
+        border: 1px solid fade(@litegrey, 60%);;
+        transition: .4s;
+    
+        &:before {
+            position: absolute;
+            content: "";
+            width: 20px;
+            height: 20px;
+            left: 3px;
+            bottom: 2px;
+            background-color: fade(@white, 60%);
+            border-radius: 50%;
+            transition: .4s;
+        }
+    }
+}
+
+

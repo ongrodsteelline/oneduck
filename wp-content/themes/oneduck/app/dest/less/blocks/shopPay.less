@@ -1,0 +1,54 @@
+.shopPay{
+
+    &__wrap{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 50px;
+    }
+    &__block{
+        display: flex;
+        
+        > div + div{
+            margin-left: 25px;
+
+            @media screen and (max-width: @media_desctop_XL){
+                margin-left: 15px;
+            }
+            @media screen and (max-width: @media_mobile){
+                margin-left: 0;
+            }
+        }
+
+        @media screen and (max-width: @media_mobile){
+            flex-direction: column;
+        }
+    }
+    &__block + &__block{
+        @media screen and (max-width: @media_desctop_xl){
+            margin-top: 30px;
+        }
+    }
+    .description{
+        max-width: 500px;
+        margin-top: 15px;
+
+        @media screen and (max-width: @media_desctop_XL){
+            max-width: 415px;
+        }
+        @media screen and (max-width: @media_desctop_xl){
+            max-width: 100%;
+        }
+    }
+    .description_max{
+        max-width: 435px;
+
+        @media screen and (max-width: @media_desctop_XL){
+            max-width: 375px;
+        }
+        @media screen and (max-width: @media_desctop_xl){
+            max-width: 100%;
+        }
+    }
+
+}

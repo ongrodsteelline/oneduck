@@ -1,0 +1,110 @@
+.profile{
+    &__inner{
+        display: flex;
+        margin-top: 35px;
+
+        div + form{
+            margin-left: 45px;
+
+            @media screen and (max-width: @media_desctop){
+                margin-left: 0;
+                margin-top: 30px;
+            }
+        }
+
+        @media screen and (max-width: @media_desctop){
+            flex-direction: column;
+        }
+    }
+    &__logo{
+        width: 132px;
+        height: 132px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        box-shadow: 0 0 25.4px 1.6px rgba(255, 103, 53, 0.4);
+        border-radius: 50%;
+        color: @orange;
+        font-family: @font_bold;
+        font-size: 50px;
+        line-height: 40px;
+
+        span{
+            width: 84px;
+            height: 31px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+            background-image: linear-gradient(-34deg, #e9ba00 0%, #e3a000 100%);
+            border-radius: 5px;
+            color: @white;
+            font-family: @font_bold;
+            font-size: 17px;
+            line-height: 17px;
+        }
+    }
+
+    .form{
+        width: 680px;
+
+        @media screen and (max-width: @media_mobile){
+            width: 100%;
+        }
+
+        &__block{
+            max-width: 640px;
+
+            @media screen and (max-width: @media_mobile){
+                max-width: 100%;
+            }
+        }
+        a.form__btn{
+            span{
+                display: none;
+                width: max-content;
+                position: absolute;
+                top: 50%;
+                left: 100%;
+                transform: translateY(-50%);
+                font-family: @font_bold;
+                font-size: 14px;
+                line-height: 14px;
+                text-transform: none;
+                margin-left: 20px;
+            }
+        }
+    }
+    .form.ok{
+        a.form__btn{
+            position: relative;
+
+            span.not_error{
+                display: block;
+                color: @green;
+            }
+            span.error{
+                display: none;
+            }
+        }
+    }
+    .form.no_ok{
+        a.form__btn{
+            position: relative;
+
+            span.error{
+                display: block;
+                color: @Red;
+            }
+            span.not_error{
+                display: none;
+            }
+        }
+    }
+}

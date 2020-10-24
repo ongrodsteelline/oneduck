@@ -1,0 +1,81 @@
+.stepper{
+
+    width: 100%;
+    max-width: 96px;
+    height: 35px;
+    display: inline-block;
+    position: relative;
+    background-color: @white;
+    border: 1px solid @litegrey;
+    border-radius: 4px;
+    padding: 1px;
+
+    &__input{
+        width: 100%;
+        height: 100%;
+        border: none;
+        -moz-appearance: textfield;
+        color: @black;
+        font-family: @font_bold;
+        font-size: 18px;
+        padding: 10px;
+        padding-right: 30px;
+        outline: none;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    }
+    &__controls{
+        position: absolute;
+        right: -10px;
+        top: -8px;
+        bottom: -5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+    }
+    &__controls [spinner-button="up"],
+    &__controls [spinner-button="down"]{
+        width: 26px;
+        height: 26px;
+        background-color: @white;
+        border: 1px solid @litegrey;
+        font-size: 20px;
+        line-height: 0;
+        color: @black;
+        border-radius: 50%;
+        padding: 0;
+        outline: none;
+        transition: all ease 0.25s;
+        cursor: pointer;
+    }
+    &__controls [spinner-button="up"]{
+        margin-bottom: -3px;
+        padding-top: 3px;
+
+        &:hover{
+            background-color: @green;
+            border: 1px solid @green;
+            color: @white;
+        }
+
+    }
+    &__controls [spinner-button="down"]{
+        width: 22px;
+        height: 22px;
+        padding-top: 3px;
+        z-index: -1;
+
+        &:hover{
+            background-color: @grey;
+            border: 1px solid @grey;
+            color: @white;
+        }
+    }
+}

@@ -1,0 +1,57 @@
+.basket{
+
+    h1{
+        padding-left: 30px;
+    }
+    .table__basket{
+        flex: initial;
+    }
+    .table tbody td + td,
+    .table thead th + th{
+        padding-left: 20px;
+    }
+    .table__multiplicity,
+    .table__scale,
+    .table__PPC{
+        min-width: 100px;
+        width: 100px;
+    }
+    .table__article{
+        min-width: 135px;
+        width: 135px;
+    }
+    .table__name{
+        @media screen and (max-width: @media_mobile){
+            padding: 15px 150px 15px 85px !important;
+        }
+        @media screen and (max-width: @media_mobile){
+            padding: 100px 0px 15px 0px !important;
+        }
+    }
+
+    .table tbody td.table__mob{
+        @media screen and (max-width: @media_mobile){
+            display: block;
+        }
+    }
+}
+@keyframes fadeOutLeft{
+
+    0% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+    }
+  
+    100% {
+      opacity: 0;
+      -webkit-transform: translateX(-20px);
+      -ms-transform: translateX(-20px);
+      transform: translateX(-20px);
+    }
+}
+.effectFadeOutLeft{
+    animation:fadeOutLeft 1s infinite;
+    -webkit-animation:fadeOutLeft 1s infinite; /* Safari and Chrome */
+}

@@ -1,0 +1,179 @@
+.dropdown__header{
+    height: 100%;
+
+    &__menu{
+        width: calc(100% + 2px);
+        display: block;
+        background-color: @white;
+        border: 1px solid @litegrey;
+        box-shadow: 0 0 14.1px 6.9px rgba(0, 0, 0, 0.03);
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        margin-left: -1px;
+        margin-right: -1px;
+        margin-top: -100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 1s;
+
+    }
+    &__menu.show{
+        margin-top: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.drop__item{
+    display: flex;
+    align-items: center;
+    background-color: @white;
+    color: @grey_text;
+    font-family: @font_reg;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    white-space: normal;
+    padding: 12px 20px;
+
+    &:hover, &:focus{
+        background-color: fade(@orange, 10%);
+        color: @grey_text;
+        text-decoration: none;
+    }
+    &.active, &:active{
+        color: @grey_text;
+        text-decoration: none;
+        background-color: fade(@orange, 10%);
+    }
+    & span{
+        font-family: @font_reg;
+        font-size: 16px;
+        line-height: 20px;
+        margin-left: 5px;
+    }
+    & span.mts{
+        color: #c80000;
+    }
+    & span.a1{
+        color: #ba7600;
+    }
+    & span.life{
+        color: #0500e7;
+    }
+    & i{
+        margin-right: 18px;
+    }
+    &_mail span{
+        position: relative;
+        display: inline-block;
+    }
+    &_mail span:before{
+        content: '';
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: block;
+        background-color: @grey_text;
+    }
+    &_color{
+        color: @orange;
+        
+        &:hover, &:focus{
+            color: @orange;
+        }
+    }
+}
+.drop__btn{
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #fff !important;
+    color: @grey_text;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+    font-family: @font_reg;
+    font-size: 17px;
+    line-height: 17px;
+    border-radius: 0;
+    z-index: 1001;
+    padding: 20px;
+
+    @media screen and (max-width: @media_tablet){
+        padding: 10px;
+    }
+    &:after{
+        display: none;
+    }
+    &:hover{
+        color: @grey_text;
+        background-color: #fff;
+        border-color: transparent;
+    }
+    & span{
+        font-family: @font_bold;
+        margin-right: 3px;
+    }
+    & i.ic-arrow_down{
+        margin-left: 20px;
+    }
+    & i.ic-phone{
+        margin-right: 20px;
+
+        @media screen and (min-width: @media_desctop_xl_min) and (max-width: 1550px){
+            margin-right: 10px;
+        }
+    }
+    & i.ic-user_check{
+        margin-right: 10px;
+    }
+}
+.drop__btn:not(:disabled):not(.disabled).active, 
+.drop__btn:not(:disabled):not(.disabled):active,
+.show>.drop__btn.dropdown-toggle {
+    color: @grey_text;
+    background-color: #fff;
+    border-color: transparent;
+}
+.drop__btn:not(:disabled):not(.disabled).active:focus, 
+.drop__btn:not(:disabled):not(.disabled):active:focus, 
+.show>.drop__btn.dropdown-toggle:focus,
+.drop__btn.focus, .drop__btn:focus{
+    box-shadow: none;
+}
+.dropdown__header_autor,
+.dropdown__header_tel{
+    @media screen and (min-width: @media_desctop_xl_min) and (max-width: 1550px){
+        .drop__btn{
+            & i.ic-arrow_down{
+                margin-left: 10px;
+            }
+        }
+    }
+    @media screen and (max-width: @media_desctop_xl){
+        .drop__btn{
+            & p{
+                display: none;
+            }
+            & i.ic-arrow_down{
+                display: none;
+            }
+            & i.ic-user_check,
+            & i.ic-phone{
+                margin-right: 0;
+            }
+        }
+        .dropdown__header__menu{
+            width: auto;
+        }
+    }   
+}
+.dropdown__header_tel{
+    @media screen and (max-width: @media_tablet){
+        display: none;
+    }
+}

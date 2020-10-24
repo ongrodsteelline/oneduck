@@ -1,0 +1,100 @@
+.param{
+
+    &__check{
+        display: block;
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 10px;
+        color: @black;
+        font-family: @font_reg;
+        font-size: 15px;
+        line-height: 19px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+
+        input{
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        input:checked ~ .checkmark:after{
+            display: block;
+        }
+        span{
+            width: 17px;
+            height: 17px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: @white;
+            border: 1px solid @litegrey;
+            border-radius: 2px;
+
+            &:after{
+                content: url(../../../assets/img/main/filter/check.svg);
+                position: absolute;
+                display: none;
+                left: 2px;
+                top: -2px;
+            }
+        }
+    }
+    &__check:nth-of-type(n+8){
+        display: none;
+    }
+    h4{
+        color: @grey;
+        font-family: @font_bold;
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 15px;
+    }
+    button{
+        display: inline-block;
+        color: @grey;
+        font-family: @font_reg;
+        font-size: 14px;
+        line-height: 15px;
+        text-decoration: none;
+        border: none;
+        background: none;
+        border-bottom: 1px solid @grey;
+        margin: 0;
+        padding: 0;
+        margin-left: 28px;
+        outline: none;
+        cursor: pointer;
+    }
+    button.show_check{
+        display: none;
+    }
+
+}
+.param_nth{
+    .param__check:nth-of-type(n+6){
+        display: none;
+    }
+}
+.param + .param{
+    margin-top: 35px;
+}
+.param.open{
+    .param__check:nth-of-type(n+6){
+        display: block;
+    }
+    button.show_check{
+        display: block;
+    }
+    button.more{
+        display: none;
+    }
+}
+
+
+
+
+
+ 

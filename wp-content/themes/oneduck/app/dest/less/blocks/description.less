@@ -1,0 +1,80 @@
+.description{
+    max-width: 620px;
+    p{
+        color: @grey_text;
+        font-family: @font_reg;
+        font-size: 18px;
+        line-height: 20px;
+
+        & + ul{
+            margin-top: 40px;
+        }
+        
+        @media screen and (max-width: @media_mobile_sm){
+            font-size: 14px;
+        }
+    }
+    h2{
+        color: @grey_text;
+        font-family: @font_bold;
+        font-size: 22px;
+        line-height: 24px;
+
+        & + p{
+            margin-top: 25px;
+        }
+
+        @media screen and (max-width: @media_mobile_sm){
+            font-size: 18px;
+            line-height: 22px;
+        }
+    }
+    h3{
+        position: relative;
+        color: @orange;
+        font-family: @font_bold;
+        font-size: 18px;
+        line-height: 20px;
+        padding-left: 25px;
+
+        &:before{
+            content: '';
+            width: 9px;
+            height: 14px;
+            display: block;
+            position: absolute;
+            top: 45%;
+            left: 0;
+            transform: translateY(-50%);
+            background: url(../../../assets/img/main/stock/chevron-right.svg) no-repeat center center;
+        }
+        & + p{
+            margin-top: 5px;
+        }
+
+        @media screen and (max-width: @media_mobile_sm){
+            font-size: 16px;
+        }
+    }
+    ul{
+        li{
+            p{
+                padding-left: 25px;
+            }
+        }
+        li + li{
+            margin-top: 25px;
+        }
+        & + p{
+            margin-top: 20px;
+        }
+    }
+
+
+    @media screen and (max-width: @media_desctop_XL){
+        max-width: 525px;
+    }
+    @media screen and (max-width: @media_desctop_xl){
+        max-width: 100%;
+    }
+}

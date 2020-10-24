@@ -1,0 +1,213 @@
+body{
+	font-family: @font_reg;
+	font-size: 14px;
+}
+body,html{
+	height: 100%;
+}
+body.over{
+	overflow: hidden;
+}
+.wrapper{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+}
+.wrapper-content{
+	flex: 1 0 auto;
+	transition: 0.5s;
+	padding-left: 256px;
+
+	@media screen and (max-width: @media_tablet){
+		padding-left: 0;
+		padding-top: 67px;
+	}
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
+	font-family: @font_reg;
+}
+h1,h2,h3,h4,h5,h6,p,ul,.h1,.h2,.h3,.h4,.h5,.h6{
+	padding: 0;
+	margin: 0
+}
+ul{list-style: none}
+.ta-c{text-align: center;}
+.ta-r{text-align: right;}
+.p-none{padding: 0;}
+.pl-none{padding-left: 0;}
+.pr-none{padding-right: 0;}
+.fl-l{float: left;}
+.fl-r{float: right;}
+.bg-1{
+	background: url(img/bg/bg-1.jpg) no-repeat 50% 50%;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.upper{text-transform: uppercase;}
+
+#map{
+	height: 330px;
+
+	@media screen and (max-width: @media_mobile){
+		height: 250px;
+	}
+}
+
+h1{
+	color: @black;
+	font-family: @font_bold;
+	font-size: 35px;
+	line-height: 35px;
+
+	@media screen and (max-width: @media_mobile_sm){
+		font-size: 24px;
+		line-height: 30px;
+	}
+}
+
+i.ic-arrow_right{
+	width: 7px;
+	height: 10px;
+	display: block;
+	background: url(../../../assets/img/sidebar/chevron-right.svg) no-repeat center center;
+}
+i.ic-arrow_right_subMenu{
+	width: 6px;
+    height: 12px;
+	display: block;
+	background: url(../../../assets/img/sidebar/subMenu/chevron-right.svg) no-repeat center center;
+}
+i.ic-arrow_down{
+	width: 12px;
+	height: 7px;
+	display: block;
+	background: url(../../../assets/img/header/chevron-down.svg) no-repeat center center;
+}
+i.ic-message{
+	width: 20px;
+	height: 20px;
+	display: block;
+	background: url(../../../assets/img/sidebar/message-square.svg) no-repeat center center;
+}
+i.ic-package{
+	width: 20px;
+	height: 23px;
+	display: block;
+	background: url(../../../assets/img/sidebar/package.svg) no-repeat center center;
+}
+i.ic-radio{
+	width: 22px;
+	height: 18px;
+	display: block;
+	background: url(../../../assets/img/sidebar/radio.svg) no-repeat center center;
+}
+i.ic-book{
+	width: 22px;
+	height: 20px;
+	display: block;
+	background: url(../../../assets/img/sidebar/book-open.svg) no-repeat center center;
+}
+i.ic-map{
+	width: 20px;
+	height: 24px;
+	display: block;
+	background: url(../../../assets/img/sidebar/map-pin.svg) no-repeat center center;
+}
+i.ic-phone{
+	width: 23px;
+	height: 23px;
+	display: block;
+	background: url(../../../assets/img/header/phone.svg) no-repeat center center;
+}
+i.ic-map__header{
+	min-width: 20px;
+	height: 24px;
+	display: block;
+	background: url(../../../assets/img/header/map-pin.svg) no-repeat center center;
+}
+i.ic-mail__header{
+	width: 23px;
+	height: 18px;
+	display: block;
+	background: url(../../../assets/img/header/mail.svg) no-repeat center center;
+}
+i.ic-user_check{
+	width: 24px;
+	height: 20px;
+	display: block;
+
+	._-icon-bg('assets/img/header/user-check.svg', @orange);
+
+	&:hover{
+		._-icon-bg('assets/img/header/user-check.svg', @grey);
+	}
+}
+i.ic-user{
+	width: 18px;
+	height: 20px;
+	display: block;
+	background: url(../../../assets/img/header/user.svg) no-repeat center center;
+}
+i.ic-shopping{
+	width: 20px;
+	height: 22px;
+	display: block;
+	background: url(../../../assets/img/header/shopping-bag.svg) no-repeat center center;
+}
+i.ic-info{
+	width: 16px;
+	height: 16px;
+	display: block;
+	background: url(../../../assets/img/main/table/alert-circle1.svg) no-repeat center center;
+}
+i.ic-filter_up{
+	width: 9px;
+	height: 5px;
+	display: block;
+	background: url(../../../assets/img/main/table/chevron-up.svg) no-repeat center center;
+}
+i.ic-filter_up:hover{
+	background: url(../../../assets/img/main/table/chevron-up_hov.svg) no-repeat center center;
+}
+i.ic-filter_down{
+	width: 9px;
+	height: 5px;
+	display: block;
+	background: url(../../../assets/img/main/table/chevron-down.svg) no-repeat center center;
+}
+i.ic-filter_down:hover{
+	background: url(../../../assets/img/main/table/chevron-down_hov.svg) no-repeat center center;
+}
+i.ic-file_text{
+	width: 18px;
+	height: 22px;
+	display: block;
+	background: url(../../../assets/img/main/table/file-text.svg) no-repeat center center;
+}
+i.ic-file{
+	width: 18px;
+	height: 22px;
+	display: block;
+	background: url(../../../assets/img/main/table/file.svg) no-repeat center center;
+}
+i.ic-shopping2{
+	width: 20px;
+	height: 22px;
+	display: block;
+	background: url(../../../assets/img/main/table/shopping.svg) no-repeat center center;
+}
+i.ic-hands{
+	width: 29px;
+	height: 24px;
+	display: inline-block;
+	background: url(../../../assets/img/main/table/hands.png) no-repeat center center;
+}
+

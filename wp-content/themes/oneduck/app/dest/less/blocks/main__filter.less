@@ -1,0 +1,226 @@
+.main__filter{
+    width: 275px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    position: relative;
+    background-color: @white;
+    border: 1px solid @litegrey;
+    box-shadow: -0.8px -23px 35.3px 13.7px rgba(0, 0, 0, 0.07);
+    padding: 35px 22px;
+    margin-left: auto;
+    overflow-y: auto;
+    z-index: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @media screen and (max-width: @media_mobile_sm){
+        width: 250px;
+    }
+
+    &__top{
+        min-height: 1000px;
+        flex: 1 0 auto;
+
+        & > input{
+            width: 100%;
+            height: 35px;
+            background-color: @white;
+            border: 1px solid @litegrey;
+            border-radius: 4px;
+            color: @grey;
+            font-family: @font_reg;
+            font-size: 16px;
+            line-height: 16px;
+            outline: none;
+            padding: 5px 15px;
+            margin-bottom: 25px;
+
+            &::placeholder{
+                color: @grey;
+            }
+            &:focus::-webkit-input-placeholder { color:transparent; }
+            &:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+            &:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+            &:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+        }
+        .param + .form__switch{
+            margin-top: 35px;
+        }
+        .form__switch{
+            margin-top: 15px;
+            margin-bottom: 15px;
+
+            .switch__text{
+                @media screen and (max-width: @media_mobile_sm){
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    &__bot{
+        flex: 0 0 auto;
+
+        div{
+            display: flex;
+            margin-bottom: 5px;
+
+            i{
+                width: 23px;
+                height: 23px;
+                display: block;
+                flex: none;
+                background: url(../../../assets/img/main/filter/info.svg) no-repeat center center;
+                background-size: cover;
+                margin-right: 11px;
+            }
+            p{
+                color: @grey;
+                font-family: @font_reg;
+                font-size: 15px;
+                line-height: 19px;
+
+                @media screen and (max-width: @media_mobile_sm){
+                    font-size: 14px;
+                }
+            }
+        }
+        button{
+            display: inline-block;
+            color: @grey;
+            font-family: @font_reg;
+            font-size: 14px;
+            line-height: 15px;
+            text-decoration: none;
+            border: none;
+            background: none;
+            border-bottom: 1px solid @grey;
+            margin: 0;
+            padding: 0;
+            margin-left: 35px;
+            outline: none;
+            cursor: pointer;
+        }
+        > button + div{
+            margin-top: 45px;
+        }
+    }
+
+    &__wrap{
+
+        height: calc(100vh - 67px);
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 67px;
+        right: 0;
+        transition: 0.5s;
+        z-index: 110;
+
+        @media screen and (max-width: @media_desctop){
+            width: 335px;
+        }
+        @media screen and (max-width: @media_mobile_sm){
+            width: 310px;
+        }
+
+        > button{
+            width: 196px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 35px;
+            right: 97%;
+            color: @orange;
+            font-family: @font_reg;
+            font-size: 16px;
+            line-height: 16px;
+            background-color: @white;
+            border: 1px solid @orange;
+            border-radius: 4px;
+            margin: 0;
+            padding: 5px 13px;
+            outline: none;
+            cursor: pointer;
+
+            @media screen and (max-width: @media_desctop){
+                width: 62px;
+                height: 61px;
+                justify-content: center;
+                right: 80%;
+            }
+
+            &:hover, &.hide{
+                color: @white;
+                background-color: @orange;
+
+                i{
+                    background: url(../../../assets/img/main/filter/filter_hov.svg) no-repeat center center;
+
+                    @media screen and (max-width: @media_desctop){
+                        width: 25px;
+                        height: 25px;
+                        background: url(../../../assets/img/main/filter/arrow-right.svg) no-repeat center center;
+                    }
+                }
+            }
+            &.hide{
+                i{ 
+                    @media screen and (max-width: @media_desctop){
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            i{
+                width: 21px;
+                height: 19px;
+                display: block;
+                background: url(../../../assets/img/main/filter/filter.svg) no-repeat center center;
+                margin-right: 10px;
+
+                @media screen and (max-width: @media_desctop){
+                    margin-right: 0;
+                }
+            }
+            span{
+                @media screen and (max-width: @media_desctop){
+                    display: none;
+                } 
+            }
+            span:last-of-type{
+                display: none;
+            }
+            &.hide{
+                span:last-of-type{
+                    display: block;
+
+                    @media screen and (max-width: @media_desctop){
+                        display: none;
+                    } 
+                }
+                span:first-of-type{
+                    display: none;
+                }
+            }
+        }
+    }
+
+}
+.main__filter__wrap.scroll{
+    max-height: 100vh;
+    top: 66px;
+}
+.main__filter__wrap.hide{
+    right: -280px;
+    z-index: 0;
+
+    @media screen and (max-width: @media_mobile_sm){
+        right: -255px;
+    }
+}
+
+
+

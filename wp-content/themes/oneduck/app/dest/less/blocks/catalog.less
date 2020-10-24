@@ -1,0 +1,28 @@
+.catalog{
+    > p{
+        color: @grey_text;
+        font-family: @font_reg;
+        font-size: 17px;
+        line-height: 19px;
+        padding-left: 30px;
+
+        @media screen and (max-width: @media_mobile){
+            padding-right: 30px;
+        }
+    }
+    > p + p{
+        margin-top: 25px;
+
+        @media screen and (max-width: @media_mobile){
+            display: none;
+        }
+    }
+    nav, h1{
+        padding-left: 30px;
+
+        @media screen and (max-width: @media_mobile){
+            padding-right: 30px;
+        }
+    }
+    
+}
