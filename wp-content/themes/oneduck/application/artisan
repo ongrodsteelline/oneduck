@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Illuminate\Console\Application as Artisan;
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\Finder;
+
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$container = new Container;
+$events = new Dispatcher($container);
+
+$artisan = new Artisan($container, $events, 'Version 1');
+$artisan->setName('OneDuck');
+
+$namespace = $app->getNamespace();
+foreach ((new Finder())->in(__DIR__.'/app/Console/Commands')->files() as $command) {
+    $command = $namespace.str_replace(
+            ['/', '.php'],
+            ['\\', ''],
+            Str::after($command->getPathname(), realpath(app_path()).DIRECTORY_SEPARATOR)
+        );
+
+    if (is_subclass_of($command, Command::class) && !(new ReflectionClass($command))->isAbstract()) {
+        $artisan->resolve($command);
+    }
+}
+
+$artisan->run();

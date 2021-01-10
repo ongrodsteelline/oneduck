@@ -1,0 +1,13 @@
+.error-input {
+    color: red;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.error-style {
+    text-align: center;
+    margin-top: 250px;
+}
+.error-style a {
+    text-decoration: underline;
+}
