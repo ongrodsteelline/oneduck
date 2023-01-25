@@ -1,7 +1,51 @@
 {
     "key": "group_5faeabe722682",
-    "title": "Категории товаров [Taxonomy]",
+    "title": "Категории товаров",
     "fields": [
+        {
+            "key": "field_62613cf748b0c",
+            "label": "Фильтры",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_62613d1448b0d",
+            "label": "Включенные фильтры",
+            "name": "filter_setup",
+            "type": "woo_attributes",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "vertical",
+            "choices": {
+                "diametr": "Диаметр",
+                "dlina": "Длина",
+                "kreplenie-v-komplekte": "Крепление в комплекте",
+                "proizvoditel": "Производитель",
+                "s-dozatorom": "С дозатором"
+            },
+            "default_value": "",
+            "allow_custom": 0,
+            "save_custom": 0,
+            "toggle": 0,
+            "return_format": "value"
+        },
         {
             "key": "field_5faead8096260",
             "label": "Акции",
@@ -91,5 +135,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1605326888
+    "modified": 1650549288
 }

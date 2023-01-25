@@ -24,7 +24,10 @@ class AjaxController
         }
         $order->setAddress($this->request->get('form')['address']);
         $order->setPayment($this->request->get('form')['payment']);
-        $order->setComment($this->request->get('form')['comment']);
+
+        if ($this->request->get('form')['comment']) {
+            $order->setComment($this->request->get('form')['comment']);
+        }
 
         $checkout = new Checkout();
         $result = $checkout->createOrder($order);

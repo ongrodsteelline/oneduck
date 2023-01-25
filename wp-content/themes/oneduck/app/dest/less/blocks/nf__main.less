@@ -1,0 +1,23 @@
+body.over{
+    overflow: initial;
+
+    @media screen and (max-width: @media_tablet){
+        overflow: hidden;
+    }
+
+    .nf__main{
+        transition: 0.5s;
+        background-color: fade(#000, 50%);
+
+        .tovar__wrap{
+            z-index: -1;
+            position: relative;
+        }
+    }
+    .subMenu{
+        max-height: max-content;
+        overflow-y: inherit;
+        margin-top: 0;
+        padding-bottom: 5px;
+    }
+}

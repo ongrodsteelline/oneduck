@@ -7,8 +7,6 @@ use Illuminate\Support\Arr;
 
 class ProductEntity
 {
-    private $faker;
-
     public $title;
     public $sku;
     public $photo;
@@ -19,6 +17,23 @@ class ProductEntity
     public $stock;
     public $price;
     public $category;
+    public $contractCurrency;
+    public $contractPrice;
+    public $cashMargin;
+    public $cashlessMargin;
+    public $rrpMargin;
+    public $productCode;
+    public $nameOfSupplier;
+    public $productCode1C;
+    public $shk1;
+    public $shk2;
+    public $shk3;
+    public $brandCountry;
+    public $countryProduction;
+    public $weight;
+    public $volume;
+    public $provider;
+    private $faker;
 
     public function __construct()
     {
@@ -45,6 +60,38 @@ class ProductEntity
         $this->setStock(rand(0, 10));
         $this->setPrice($this->faker->randomFloat(2, 0, 1000));
         $this->setCategory($this->generateCategory());
+
+        $this->contractCurrency = $this->faker->randomElement([
+            'byn',
+            'rub',
+            'usd',
+            'eur'
+        ]);
+        $this->contractPrice = $this->faker->randomFloat(2, 0, 1000);
+        $this->cashMargin = $this->faker->randomFloat(2, 0, 100);
+        $this->cashlessMargin = $this->faker->randomFloat(2, 0, 100);
+        $this->rrpMargin = $this->faker->randomFloat(2, 0, 100);
+        $this->productCode = $this->faker->unique()->uuid;
+        $this->productCode1C = $this->faker->unique()->uuid;
+        $this->nameOfSupplier = ucfirst($this->faker->unique()->words(2, true));
+        $this->shk1 = $this->faker->unique()->hexColor;
+        $this->shk2 = $this->faker->unique()->hexColor;
+        $this->shk3 = $this->faker->unique()->hexColor;
+        $this->brandCountry = $this->faker->unique()->country;
+        $this->countryProduction = $this->faker->unique()->country;
+        $this->weight = rand(0, 100);
+        $this->volume = rand(0, 100);
+        $this->provider = $this->faker->unique()->company;
+    }
+
+    public function setContractCurrency()
+    {
+        $this->contractCurrency = $this->faker->randomElement([
+            'byn',
+            'rub',
+            'usd',
+            'eur'
+        ]);
     }
 
     /**
@@ -63,14 +110,6 @@ class ProductEntity
         $this->sku = $sku;
     }
 
-    protected function generatePhoto()
-    {
-        $random = rand(1, 5);
-        $photo = storage_path('placeholders/'.$random.'.jpg');
-
-        return $photo;
-    }
-
     /**
      * @param  mixed  $photo
      */
@@ -80,10 +119,27 @@ class ProductEntity
         $this->photo = $photo;
     }
 
+    protected function generatePhoto()
+    {
+        $random = rand(1, 5);
+        $photo = storage_path('placeholders/'.$random.'.jpg');
+
+        return $photo;
+    }
+
     /*
      * Получаем список всех брендов
      * Переводим айди брендов в массив и случайным образом выбираем айди для товара
      * */
+
+    /**
+     * @param  mixed  $brand
+     */
+    public function setBrand($brand): void
+    {
+        $this->brand = $brand;
+    }
+
     protected function generateBrand()
     {
         $brands = get_terms([
@@ -96,17 +152,18 @@ class ProductEntity
         return $this->faker->randomElement($brandsId);
     }
 
-    /**
-     * @param  mixed  $brand
-     */
-    public function setBrand($brand): void
-    {
-        $this->brand = $brand;
-    }
-
     /*
      * Формируем кратность
      * */
+
+    /**
+     * @param  mixed  $multiplicity
+     */
+    public function setMultiplicity($multiplicity): void
+    {
+        $this->multiplicity = $multiplicity;
+    }
+
     protected function generateMultiplicity()
     {
         $random = $this->faker->randomElement([
@@ -115,19 +172,11 @@ class ProductEntity
             [15, 30, 150]
         ]);
 
-        $multiplicity = array_map(function($value) {
+        $multiplicity = array_map(function ($value) {
             return ['number' => $value];
         }, $random);
 
         return $multiplicity;
-    }
-
-    /**
-     * @param  mixed  $multiplicity
-     */
-    public function setMultiplicity($multiplicity): void
-    {
-        $this->multiplicity = $multiplicity;
     }
 
     /**
@@ -166,6 +215,15 @@ class ProductEntity
      * Получаем список всех категорий
      * Переводим айди категорий в массив и случайным образом выбираем айди для товара
      * */
+
+    /**
+     * @param  mixed  $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
     protected function generateCategory()
     {
         $categories = get_terms([
@@ -177,13 +235,5 @@ class ProductEntity
         $categoriesId = Arr::pluck($categories, 'term_id');
 
         return $this->faker->randomElement($categoriesId);
-    }
-
-    /**
-     * @param  mixed  $category
-     */
-    public function setCategory($category): void
-    {
-        $this->category = $category;
     }
 }

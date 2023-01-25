@@ -1,1 +1,0 @@
-Hello, world<?php /**PATH /var/www/wp-content/themes/oneduck/application/resources/views/test.blade.php ENDPATH**/ ?>

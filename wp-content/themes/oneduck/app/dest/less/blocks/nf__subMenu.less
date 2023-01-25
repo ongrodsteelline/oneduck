@@ -1,0 +1,325 @@
+.nf__subMenu{
+    width: 320px;
+    position: absolute;
+    height: max-content;
+    top: -3px;
+    background-color: #fff;
+    box-shadow: 0 0 79.2px 7.8px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 0 10px 10px 0;
+    z-index: -1;
+    transition: 0.2s;
+
+    @media screen and (max-width: @media_tablet){
+        width: 290px;
+        z-index: 5;
+        padding-top: 0;
+    }
+    @media screen and (max-width: @media_mobile){
+        width: 100%;
+    }
+
+    &::before{
+        display: none;
+    }
+    & > li{
+        position: relative;
+
+        & > a{
+            display: flex;
+            align-items: center;
+            color: #2a2a2a;
+            font-family: @font_reg;
+            font-size: 15px;
+            line-height: 15px;
+            text-decoration: none;
+            border-bottom: none;
+            padding: 12px 45px 12px 25px;
+
+            &:hover{
+                border-bottom: none;
+            }
+        }
+        & > span{
+            width: 40px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-left: 1px solid #c4c4c4;
+            color: @grey;
+            font-family: @font_reg;
+            font-size: 15px;
+            line-height: 15px;
+            padding-top: 2px;
+            z-index: 1;
+            cursor: default;
+
+            i{
+                width: 6px;
+                height: 10px;
+                display: block;
+                background-image: url(../../../assets/img/main/tovar_new/arrow_next.png);
+                background-size: 6px 10px;
+                background-repeat: no-repeat;
+                background-position: center center;
+                margin-left: 5px;
+                margin-bottom: 3px;
+                transition: 0.3s;
+            }
+        }
+    }
+    & > li {
+        border-bottom: 1px solid #c4c4c4;
+    }
+    & > li + li{
+        margin-top: 0;
+    }
+    & > li:last-child{
+        border-bottom: 1px solid transparent;
+    }
+    & > li.open{
+        & > span{
+            i{
+                transform: rotate(-90deg);
+
+                @media screen and (max-width: @media_tablet){
+                    transform: rotate(0);
+                }
+            }
+        }
+    }
+    &.show{
+        left: 255px;
+    }
+    .nf__subMenu-Menu2{
+        display: none;
+        background-color: #e7ecee;
+        border-top: 1px solid #c4c4c4;
+        margin: 0;
+
+        @media screen and (max-width: @media_tablet){
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 290px;
+            width: 100%;
+            min-height: 100vh;
+            // background-color: #e7ecee;
+            transform: translate3d(100%, 0, 0);
+            z-index: 5;
+            transition: 0.2s;
+        }
+        
+
+
+        & > li{
+            position: relative;
+    
+            &::before{
+                content: '';
+                display: none;
+            }
+            & > a{
+                display: flex;
+                align-items: center;
+                background-color: #e7ecee;
+                color: #2a2a2a;
+                font-family: @font_reg;
+                font-size: 15px;
+                line-height: 15px;
+                text-decoration: none;
+                border-bottom: none;
+                padding: 12px 45px 12px 25px;
+    
+                &:hover{
+                    border-bottom: none;
+                }
+            }
+            & > span{
+                width: 40px;
+                height: 39px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                right: 0;
+                border-left: 1px solid #c4c4c4;
+                color: @grey;
+                font-family: @font_reg;
+                font-size: 15px;
+                line-height: 15px;
+                padding-top: 2px;
+                z-index: 1;
+                cursor: default;
+    
+                i{
+                    width: 6px;
+                    height: 10px;
+                    display: block;
+                    background-image: url(../../../assets/img/main/tovar_new/arrow_next.png);
+                    background-size: 6px 10px;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    margin-left: 5px;
+                    margin-bottom: 3px;
+                    transition: 0.3s;
+                }
+            }
+        }
+        & > li{
+            border-bottom: 1px solid #c4c4c4;
+        }
+        & > li:last-child{
+            border-bottom: 1px solid transparent;
+        }
+        & > li + li{
+            margin-top: 0;
+        }
+        & > li.open{
+            & > span{
+                i{
+                    transform: rotate(-90deg);
+
+                    @media screen and (max-width: @media_tablet){
+                        transform: rotate(0);
+                    }
+                }
+            }
+        }
+    }
+    .nf__btnMenu-wrap.open{
+        .nf__subMenu-Menu2{
+            opacity: 1;
+            visibility: visible;
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    .nf__subMenu-Menu3{
+        display: none;
+        background-color: #d1dbdf;
+        border-top: 1px solid #c4c4c4;
+        margin: 0;
+
+        @media screen and (max-width: @media_tablet){
+            display: block;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 290px;
+            width: 100%;
+            min-height: 100vh;
+            // background-color: #d1dbdf;
+            transform: translate3d(100%, 0, 0);
+            z-index: 5;
+            transition: 0.2s;
+        }
+
+        & > li{
+            position: relative;
+    
+            &::before{
+                content: '';
+                display: none;
+            }
+            & > a{
+                display: flex;
+                align-items: center;
+                background-color: #d1dbdf;
+                color: #2a2a2a;
+                font-family: @font_reg;
+                font-size: 15px;
+                line-height: 15px;
+                text-decoration: none;
+                border-bottom: none;
+                padding: 12px 45px 12px 25px;
+    
+                &:hover{
+                    border-bottom: none;
+                }
+            }
+            & > span{
+                width: 40px;
+                height: 39px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                right: 0;
+                border-left: 1px solid #c4c4c4;
+                color: @grey;
+                font-family: @font_reg;
+                font-size: 15px;
+                line-height: 15px;
+                padding-top: 2px;
+                z-index: 1;
+                cursor: default;
+    
+                i{
+                    width: 6px;
+                    height: 10px;
+                    display: block;
+                    background-image: url(../../../assets/img/main/tovar_new/arrow_next.png);
+                    background-size: 6px 10px;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    margin-left: 5px;
+                    margin-bottom: 3px;
+                }
+            }
+        }
+        & > li {
+            border-bottom: 1px solid #c4c4c4;
+            margin-top: 0;
+        }
+        & > li + li{
+            margin-top: 0;
+        }
+        & > li:last-child{
+            border-bottom: 1px solid transparent;
+        }
+    }
+    .nf__btnMenu-wrap2.open{
+        .nf__subMenu-Menu3{
+            opacity: 1;
+            visibility: visible;
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    .nf__subMenu__back{
+        display: none;
+        align-items: center;
+        background-color: #053649;
+        color: rgba(255,255,255,.6);
+        padding: 12px 45px 12px 25px;
+
+        @media screen and (max-width: @media_tablet){
+            display: flex;
+        }
+
+        i{
+            width: 8px;
+            height: 12px;
+            display: block;
+            background-image: url(../../../assets/img/main/tovar_new/arrow_prev_menu.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-right: 10px;
+            margin-bottom: 2px;
+        }
+
+    }
+}

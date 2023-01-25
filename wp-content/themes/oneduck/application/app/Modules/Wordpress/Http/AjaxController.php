@@ -3,6 +3,7 @@
 namespace App\Modules\Wordpress\Http;
 
 use App\Core\Ajax;
+use App\Modules\Wordpress\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class AjaxController
@@ -10,6 +11,7 @@ class AjaxController
     public function __construct()
     {
         Ajax::listen('save_profile', [$this, 'saveProfile'], 'yes');
+        Ajax::listen('save_group_mixed', [$this, 'saveGroupMixed'], 'yes');
     }
 
     public function saveProfile()
@@ -90,6 +92,18 @@ class AjaxController
             'ID' => $user->ID,
             'user_email' => $request->get('form')['email']
         ]);
+
+        wp_send_json_success();
+    }
+
+    public function saveGroupMixed()
+    {
+        $request = request();
+
+        $value = $request->get('value');
+
+        $user = new User();
+        $user->setGroupMixed($value);
 
         wp_send_json_success();
     }

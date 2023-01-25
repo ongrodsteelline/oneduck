@@ -4,11 +4,13 @@ namespace App\Modules\Woocommerce\Helpers;
 
 use App\Helpers\Breadcrumbs;
 use App\Helpers\Paginator;
+use App\Modules\Wordpress\Helper as HelperWordpress;
 
 class CatalogView
 {
     protected $term;
     protected $page;
+    protected $brand;
     protected $products;
 
     public function __construct()
@@ -20,11 +22,20 @@ class CatalogView
         if (is_shop()) {
             $this->page = get_post(wc_get_page_id('shop'));
         }
+
+        if (is_tax('product_brand')) {
+            $this->brand = get_term($GLOBALS['wp_query']->get_queried_object());
+        }
     }
 
     public function getCategory()
     {
         return $this->term;
+    }
+
+    public function getBrand()
+    {
+        return $this->brand;
     }
 
     public function getPage()
@@ -50,7 +61,7 @@ class CatalogView
     public function getPaginateUrl()
     {
         $url = $this->isCategory() ? get_term_link($this->term) : get_permalink($this->page);
-        return $url.'page/(:num)';
+        return $url . 'page/(:num)';
     }
 
     /*
@@ -80,6 +91,43 @@ class CatalogView
         return [];
     }
 
+    public function getAncestors()
+    {
+        $ancestors = get_ancestors($this->term->term_id, 'product_cat');
+        $ancestors = array_reverse($ancestors);
+
+        if (empty($ancestors)) {
+            $ancestors = [$this->term->term_id];
+        } else {
+            $ancestors[] = $this->term->term_id;
+        }
+
+        return $ancestors;
+    }
+
+    public function getParentCategory()
+    {
+        $parent = get_term($this->getAncestors()[0]);
+        $parent->children = $this->getCategoryNavigation(HelperWordpress::getTaxonomyHierarchy('product_cat', $parent->term_id));
+
+        return $parent;
+    }
+
+    public function getCategoryNavigation($terms = [])
+    {
+        foreach ($terms as $term) {
+            if (in_array($term->term_id, $this->getAncestors())) {
+                $term->active = true;
+            }
+
+            if (count($term->children)) {
+                $term->children = $this->getCategoryNavigation($term->children);
+            }
+        }
+
+        return $terms;
+    }
+
     public function getPagination($total, $paged = 1)
     {
         $paginator = new Paginator($total, $this->getLimit(), $paged, $this->getPaginateUrl());
@@ -104,7 +152,7 @@ class CatalogView
     public function getOrder()
     {
         return ($_COOKIE['cf_catalog_order']) ? json_decode(stripslashes($_COOKIE['cf_catalog_order']), true) : [
-            'date' => 'DESC'
+            'product_warehouse' => 'DESC'
         ];
     }
 

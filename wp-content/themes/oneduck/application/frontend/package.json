@@ -1,0 +1,30 @@
+{
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "watch": "vite build --mode=development --watch",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@splidejs/splide": "^3.6.12",
+        "axios": "^0.21.0",
+        "axios-cancel": "^0.2.2",
+        "core-js": "^3.6.5",
+        "js-cookie": "^2.2.1",
+        "lodash": "^4.17.20",
+        "slick-carousel": "^1.8.1",
+        "vue": "^3.2.25",
+        "vue-router": "4",
+        "vuex": "^4.0.2"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^2.0.0",
+        "autoprefixer": "^10.4.2",
+        "postcss": "^8.4.5",
+        "sass": "^1.42.1",
+        "vite": "^2.7.2"
+    }
+}

@@ -1,0 +1,32 @@
+.bs-tooltip-top{
+    top: -10px!important;
+    left: -65px!important;
+    padding: 0;
+
+    .tooltip-inner{
+        max-width: 220px;
+        background-color: @white;
+        box-shadow: 0 0 17.2px 3.8px rgba(0, 0, 0, 0.1);
+        color: @black;
+        font-family: @font_reg;
+        font-size: 15px;
+        line-height: 16px;
+        text-align: left;
+        padding: 15px 20px;
+    }
+    .arrow{
+        width: 12px;
+        height: 10px;
+        left: 126px !important;
+        bottom: 0;
+        right: 6px;
+
+        &:before{
+            content: "";
+            border-width: 9px;
+            border-left-color: transparent;
+            border-right-color: @white;
+            border-top-color: @white;
+        }
+    }
+}

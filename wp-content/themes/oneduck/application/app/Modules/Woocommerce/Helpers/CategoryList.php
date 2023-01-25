@@ -7,12 +7,12 @@ class CategoryList
     public static function getCategories($parent = 0, $lvl = 0, $maxLvl = 5)
     {
         $args = [
-            'hide_empty' => 0,
+            'hide_empty' => false,
             'taxonomy' => 'product_cat',
             'parent' => $parent
         ];
 
-        $categories = get_categories($args);
+        $categories = get_terms($args);
 
         if ($lvl === $maxLvl) {
             return $categories;

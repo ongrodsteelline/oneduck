@@ -9,12 +9,27 @@ class Woocommerce extends Module
     function providers()
     {
         return [
-            Register\BrandTaxonomy::class,
+            Taxonomies::class,
+
             ShopController::class,
+
             Http\AjaxController::class,
+
             Cart\AjaxController::class,
+
             Checkout\AjaxController::class,
-            Checkout\AdminOrderDetail::class
+            Checkout\AdminOrderDetail::class,
+            Checkout\Checkout::class,
+
+            OrderHistory\AjaxController::class,
+
+            Filter\Admin::class,
+
+            Exchange\AcfReadOnly::class,
+
+            Emails::class,
+
+            Import\Admin::class
         ];
     }
 }

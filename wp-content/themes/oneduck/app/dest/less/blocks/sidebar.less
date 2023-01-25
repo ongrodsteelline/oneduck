@@ -40,7 +40,7 @@
         &:before{
             content: '';
             width: 56px;
-            height: 65%;
+            height: 100%;
             position: absolute;
             top: 0;
             right: 0;
@@ -299,12 +299,14 @@ body.over .sidebar{
     }// min-width: 992px;
     
 }
+
 .wrapper.min .wrapper-content{
     padding-left: 90px;
 }
 .wrapper.min .subMenu{
     &:hover{
-        left: 90px;
+        left: 256px;
+        // left: 90px;
     }
 
 }
@@ -312,6 +314,36 @@ body.over .sidebar{
 @media screen and (min-width: @media_tablet_min){
     .wrapper.min_cont .wrapper-content{
         padding-left: 256px;
+    }
+    .wrapper.min.min_cont .sidebar{
+        width: 256px;
+
+        .sidebar__top{    
+            &__logo{    
+                a{
+                        width: 113px;
+                        height: 69px;
+                        display: block;
+                        background: url(../../../assets/img/sidebar/logo.png) no-repeat center center;
+                }
+            }
+            &:before{
+                display: none;
+            }
+        }
+        .sidebar__bot{
+            a{
+                p{
+                    display: block;
+                }
+                i{
+                    left: 0;
+                }
+            }
+            .switch__text{
+                display: block;
+            }
+        }
     }
 
 }// min-width: 992px;

@@ -8,6 +8,10 @@
                         <i class="ic-arrow_right"></i>
                     @endif
                 </a>
+
+                @if(count($category->children) > 0)
+                    <span class="js-sidebar__menu__count">{{ count($category->children) }}</span>
+                @endif
             </li>
         @endforeach
     </ul>

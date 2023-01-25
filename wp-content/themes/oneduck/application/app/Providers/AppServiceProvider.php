@@ -9,6 +9,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         add_theme_support('woocommerce');
+        add_action('init', [$this, 'disableScheduleDelete']);
 
         if (defined('SMTP_USERNAME')) {
             add_action('phpmailer_init', [$this, 'smtp_setup']);
@@ -25,5 +26,13 @@ class AppServiceProvider extends ServiceProvider
         $phpmailer->SMTPSecure = SMTP_SECURE;
 
         $phpmailer->IsSMTP();
+    }
+
+    /*
+     * Отключаем автоматическую очистку корзин
+     * */
+    public function disableScheduleDelete()
+    {
+        remove_action('wp_scheduled_delete', 'wp_scheduled_delete');
     }
 }

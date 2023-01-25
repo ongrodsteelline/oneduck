@@ -4,9 +4,12 @@ namespace App\Modules\Woocommerce\Http;
 
 use App\Core\Ajax;
 use App\Modules\Woocommerce\Cart\Cart;
+use App\Modules\Woocommerce\Filter\Filter;
 use App\Modules\Woocommerce\Helpers\CatalogView;
+use App\Modules\Woocommerce\Helpers\Helper;
 use App\Modules\Woocommerce\Helpers\ProductsQuery;
 use Illuminate\Http\Request;
+use WP_Query;
 
 class AjaxController
 {
@@ -14,6 +17,8 @@ class AjaxController
     {
         Ajax::listen('get_products', [$this, 'getProducts']);
         Ajax::listen('search', [$this, 'search']);
+        Ajax::listen('switch_catalog_column', [$this, 'switchCatalogColumn'], 'yes');
+        Ajax::listen('store_user_warehouses', [$this, 'storeUserWarehouses']);
     }
 
     public function getProducts()
@@ -23,11 +28,53 @@ class AjaxController
         $catalogView = new CatalogView();
 
         $productsQuery = new ProductsQuery();
+
         if ($request->get('type') === 'category') {
             $productsQuery = $productsQuery->setCategoy($request->get('category_id'));
+            $categoryQuery = $productsQuery->get();
+            $totalFound = $categoryQuery->totalFound();
         }
 
-        $productsQuery = $productsQuery->setMetaQuery([
+        if ($request->get('type') === 'brand') {
+            $productsQuery = $productsQuery->setBrand($request->get('brand_id'));
+        }
+
+        if ($request->get('search')) {
+            $productsQuery->setSearch($request->get('search'));
+        }
+
+        if ($request->get('filter') && is_array($request->get('filter'))) {
+            global $wpdb;
+
+            $taxQuery = [
+                'filter' => [
+                    'relation' => 'AND'
+                ]
+            ];
+
+            foreach ($request->get('filter') as $key => $selected) {
+                $attribute = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}woocommerce_attribute_taxonomies WHERE attribute_name = '%s'",
+                    $key));
+
+                if (is_array($selected) && $attribute->attribute_type === 'select') {
+                    $taxQuery['filter'][] = [
+                        'taxonomy' => 'pa_' . $key,
+                        'field' => 'id',
+                        'terms' => $selected,
+                        'operator' => 'IN'
+                    ];
+                } else if ($attribute->attribute_type === 'toggle') {
+                    $taxQuery['filter'][] = [
+                        'taxonomy' => 'pa_' . $key,
+                        'operator' => 'EXISTS'
+                    ];
+                }
+            }
+
+            $productsQuery->setTaxQuery($taxQuery);
+        }
+
+        $metaQuery = [
             'stock' => [
                 'key' => '_stock',
                 'compare' => 'EXISTS',
@@ -38,7 +85,9 @@ class AjaxController
                 'compare' => 'EXISTS',
                 'type' => 'DECIMAL'
             ]
-        ]);
+        ];
+
+        $productsQuery = $productsQuery->setMetaQuery($metaQuery);
 
         if ($request->get('order')) {
             $productsQuery = $productsQuery->setOrder($request->get('order'));
@@ -48,7 +97,11 @@ class AjaxController
 
         wp_send_json([
             'products' => $productsQuery->products(),
-            'pagination' => $catalogView->getPagination($productsQuery->totalFound(), $request->get('paged'))
+            'pagination' => $catalogView->getPagination($productsQuery->totalFound(), $request->get('paged')),
+            'counter' => [
+                'all' => (isset($totalFound)) ? $totalFound : $productsQuery->totalFound(),
+                'filter' => ($request->get('filter') || $request->get('search')) ? $productsQuery->totalFound() : 0
+            ]
         ]);
     }
 
@@ -71,7 +124,7 @@ class AjaxController
         }
 
         $products = [];
-        $productsQuery = new \WP_Query([
+        $productsQuery = new WP_Query([
             'post_type' => 'product',
             'post_status' => 'publish',
             'posts_per_page' => 15,
@@ -85,12 +138,31 @@ class AjaxController
             ];
         }
 
-        $total = $productsQuery->found_posts;
+        $total = $productsQuery->found_posts + count($categories);
 
         wp_send_json([
             'products' => $products,
             'categories' => $categories,
             'total' => $total
         ]);
+    }
+
+    public function switchCatalogColumn()
+    {
+        $request = request();
+        $user = wp_get_current_user();
+
+        update_user_meta($user->ID, 'hidden_catalog_columns', $request->get('columns'));
+
+        wp_send_json_success();
+    }
+
+    public function storeUserWarehouses()
+    {
+        $request = request();
+
+        Helper::storeSelectedWarehouses($request->get('warehouses'));
+
+        wp_send_json_success();
     }
 }

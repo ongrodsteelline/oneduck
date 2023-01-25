@@ -7,7 +7,7 @@ function my_login_form()
         <div class="form__left">
             <div class="form__group">
                 <div class="form__group__field form__group__field_max js-form__group__field">
-                    <input type="text" name="log" id="user_login" class="js-validate" placeholder="info@samtehmir.ru">
+                    <input type="text" name="log" id="user_login" class="js-validate" placeholder="Email">
                     <div><p>Это поле не может быть пустым</p>
                         <button class="js-btn__correct">OK</button>
                     </div>
@@ -15,7 +15,7 @@ function my_login_form()
             </div>
             <div class="form__group">
                 <div class="form__group__field form__group__field_max js-form__group__field">
-                    <input type="password" name="pwd" id="user_pass" class="js-validate" placeholder="password">
+                    <input type="password" name="pwd" id="user_pass" class="js-validate" placeholder="Пароль">
                     <div><p>Это поле не может быть пустым</p>
                         <button class="js-btn__correct">OK</button>
                     </div>

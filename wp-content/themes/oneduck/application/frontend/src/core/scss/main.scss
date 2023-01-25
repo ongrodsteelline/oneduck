@@ -1,0 +1,12 @@
+@import "@splidejs/splide/dist/css/splide-core.min.css";
+@import "pages/catalog";
+@import "pages/search";
+
+.btn {
+    background-color: #066ed5;
+    height: 50px;
+    padding: 15px 20px;
+    font-family: CirceBold;
+    font-size: 16px;
+    color: #fff;
+}

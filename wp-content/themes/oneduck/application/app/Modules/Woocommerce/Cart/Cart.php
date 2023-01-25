@@ -52,7 +52,8 @@ class Cart
                 'product' => $product,
                 'product_id' => $item['product_id'],
                 'quantity' => (int)$item['quantity'],
-                'isValid' => $isValid
+                'isValid' => $isValid,
+                'comment' => $item['comment']
             ];
         }
 

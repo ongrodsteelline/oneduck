@@ -1,7 +1,7 @@
 <?php
 
+use App\Modules\Woocommerce\Filter\Filter;
 use App\Modules\Woocommerce\Helpers\ProductsQuery;
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use App\Modules\Woocommerce\Helpers\CatalogView;
 use App\Modules\Wordpress\Helper;
 
@@ -9,7 +9,6 @@ Helper::disableCacheResponse();
 
 global $wp_query;
 
-$crawlerDetect = new CrawlerDetect();
 $catalogView = new CatalogView();
 
 $productsQuery = new ProductsQuery();
@@ -17,7 +16,7 @@ if ($catalogView->isCategory()) {
     $productsQuery = $productsQuery->setCategoy($catalogView->getId());
 }
 
-$productsQuery = $productsQuery->setMetaQuery([
+$metaQuery = [
     'stock' => [
         'key' => '_stock',
         'compare' => 'EXISTS',
@@ -28,12 +27,16 @@ $productsQuery = $productsQuery->setMetaQuery([
         'compare' => 'EXISTS',
         'type' => 'DECIMAL'
     ]
-]);
+];
+$productsQuery = $productsQuery->setMetaQuery($metaQuery);
 
 $productsQuery = $productsQuery->setPage($catalogView->getPaged())
     ->setLimit($catalogView->getLimit())
     ->setOrder($catalogView->getOrder())
     ->get();
+
+$filter = new Filter($catalogView);
+$attributes = $filter->getAttributes();
 
 echo view('catalog.index', [
     'type' => $catalogView->isCategory() ? 'category' : 'catalog',
@@ -41,9 +44,14 @@ echo view('catalog.index', [
     'title' => $catalogView->getName(),
     'description' => $catalogView->getDescription(),
     'products' => $productsQuery->products(),
+    'attributes' => $attributes,
     'paged' => $catalogView->getPaged(),
     'pagination' => $catalogView->getPagination($productsQuery->totalFound(), $catalogView->getPaged()),
     'breadcrumbs' => $catalogView->getBreadcrumbs(),
+    'parentCategory' => $catalogView->getParentCategory(),
     'limit' => $catalogView->getLimit(),
-    'isCrawler' => $crawlerDetect->isCrawler()
+    'counter' => [
+        'all' => $productsQuery->totalFound(),
+        'filter' => 0
+    ]
 ]);

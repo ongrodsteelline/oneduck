@@ -12,29 +12,30 @@ class AssetServiceProvider extends ServiceProvider
             'depends' => []
         ],
         [
-            'src' => 'assets/css/main.css',
+            'src' => 'assets/index.css',
             'depends' => []
-        ],
+        ]
     ];
 
     public $js = [
         [
             'src' => 'static/alt.js',
-            'footer' => true
-        ],
-        [
-            'src' => 'assets/js/chunk-vendors.js',
-            'footer' => true
-        ],
-        [
-            'src' => 'assets/js/main.js',
+            'depends' => [
+                'jquery',
+                'script-slick'
+            ],
             'footer' => true
         ]
     ];
 
     public $adminCss = [];
 
-    public $adminJs = [];
+    public $adminJs = [
+        [
+            'src' => 'admin/alt.js',
+            'footer' => true
+        ]
+    ];
 
     public function register()
     {

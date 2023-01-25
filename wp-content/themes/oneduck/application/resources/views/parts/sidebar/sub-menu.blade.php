@@ -10,6 +10,9 @@
     @foreach($children as $category)
         <li class="subMenu__title">
             <a href="{{ get_term_link($category) }}">{{ $category->name }}</a>
+            @if(count($category->children) > 0)
+                <span class="subMenu__count">{{ count($category->children) }}</span>
+            @endif
         </li>
         @foreach($category->children as $child)
             <li>

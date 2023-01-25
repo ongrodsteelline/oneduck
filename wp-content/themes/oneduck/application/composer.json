@@ -21,7 +21,7 @@
         "illuminate/validation": "^7.0",
         "fzaninotto/faker": "^1.9",
         "league/flysystem": "^1.1",
-        "jaybizzle/crawler-detect": "^1.2"
+        "phpoffice/phpspreadsheet": "^1.17"
     },
     "autoload": {
         "classmap": [

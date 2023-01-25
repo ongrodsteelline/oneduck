@@ -24,17 +24,24 @@ class AcfServiceProvider extends ServiceProvider
     * */
     public function acfPages()
     {
-        acf_add_options_page(
+        $parent = acf_add_options_page(
             [
                 'page_title' => 'Настройки сайта',
                 'menu_title' => 'Настройки сайта',
                 'menu_slug' => 'cf-options',
                 'capability' => 'edit_posts',
-                'redirect' => true,
+                'redirect' => false,
                 'position' => 3.14,
                 'icon_url' => 'dashicons-admin-settings',
             ]
         );
+
+        acf_add_options_sub_page([
+            'page_title' => 'Курс валют',
+            'menu_title' => 'Курс валют',
+            'parent_slug' => $parent['menu_slug'],
+            'menu_slug' => 'cf-currencies',
+        ]);
     }
 
     public function jsonDir()

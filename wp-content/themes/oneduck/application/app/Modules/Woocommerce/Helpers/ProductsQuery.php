@@ -3,13 +3,14 @@
 namespace App\Modules\Woocommerce\Helpers;
 
 use App\Modules\Woocommerce\Models\Product;
+use WP_Query;
 
 class ProductsQuery
 {
-    protected $args = [];
-    protected $query;
-    protected $products;
-    protected $totalFound = 0;
+    public $args = [];
+    public $query;
+    public $products;
+    public $totalFound = 0;
 
     public function get()
     {
@@ -17,13 +18,15 @@ class ProductsQuery
             'post_type' => 'product',
             'post_status' => 'publish',
             'posts_per_page' => 10,
-            'orderby' => [],
-            'tax_order' => []
+            'orderby' => [
+                'product_warehouse' => 'DESC'
+            ],
+            'tax_query' => []
         ];
 
         $args = array_replace($args, $this->args);
 
-        $this->query = new \WP_Query($args);
+        $this->query = new WP_Query($args);
 
         $this->products = $this->schemaProducts($this->query->get_posts());
         $this->totalFound = $this->query->found_posts;
@@ -31,6 +34,9 @@ class ProductsQuery
         return $this;
     }
 
+    /**
+     * @return Product[]
+     * */
     public function products()
     {
         return $this->products;
@@ -54,7 +60,7 @@ class ProductsQuery
     }
 
     /**
-     * @param  array|string  $status
+     * @param array|string $status
      */
     public function setStatus($status)
     {
@@ -73,6 +79,17 @@ class ProductsQuery
             'taxonomy' => 'product_cat',
             'field' => 'id',
             'terms' => $category,
+        ];
+
+        return $this;
+    }
+
+    public function setBrand($brand)
+    {
+        $this->args['tax_query'][] = [
+            'taxonomy' => 'product_brand',
+            'field' => 'id',
+            'terms' => $brand,
         ];
 
         return $this;
@@ -120,10 +137,27 @@ class ProductsQuery
         return $this;
     }
 
-    public function setTaxOrder($order)
+    public function setTaxQuery($query)
     {
-        $this->args['tax_order'] = $order;
+        $this->args['tax_query'] = array_merge($query, $this->args['tax_query'] ?? []);
 
+        return $this;
+    }
+
+    public function setSearch($query)
+    {
+        $this->args['s'] = $query;
+        $this->args['s_meta_keys'] = ['shk1', 'shk2', 'shk3'];
+
+        return $this;
+    }
+
+    /*
+     * Игнорируем лимит заданный через куки
+     * */
+    public function setIgnoreCookieLimit()
+    {
+        $this->args['ignore_cookie_limit'] = 1;
         return $this;
     }
 }

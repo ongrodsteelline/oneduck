@@ -6,11 +6,13 @@ function my_registration_form()
         <fieldset>
             <div class="form__block">
                 <div class="form__group form__group_fl form__group_inp">
-                    <label for="">Юр. ЛИЦО? <span class="js-info" data-toggle="tooltip" data-placement="left"
-                                                  title="Вы можете заказать товар только в количестве, кратном указанном"></span></label>
+                    <label for="">Юр. ЛИЦО?
+                        <span class="js-info" data-toggle="tooltip" data-placement="left"
+                              title="Вы можете заказать товар только в количестве, кратном указанном"></span>
+                    </label>
                     <div class="switch-wrap form__switch form__switch_mg">
                         <label class="switch">
-                            <input type="checkbox" class="">
+                            <input type="checkbox" name="isLegal" class="">
                             <span class="switch__btn"></span>
                         </label>
                     </div><!-- /switch-wrap -->
@@ -18,7 +20,7 @@ function my_registration_form()
                 <div class="form__group form__group_inp">
                     <label for="nameur">Название Юр. Лица</label>
                     <div class="form__group__field">
-                        <input type="text" name="legalEntity" id="nameur">
+                        <input type="text" name="legalEntity">
                     </div>
                 </div>
             </div><!-- /form__block -->
@@ -98,50 +100,33 @@ function my_registration_form()
 
 add_action('wp_ajax_register_user_front_end', 'register_user_front_end', 0);
 add_action('wp_ajax_nopriv_register_user_front_end', 'register_user_front_end');
-add_action('user_register', 'register_fields');
 
 function register_user_front_end()
 {
-    /*
-     * ToDo Перевести на ACF поля
-     * */
-    $new_user_name = stripcslashes($_POST['email']);
-    $first_name = stripcslashes($_POST['firstname']);
-    $last_name = stripcslashes($_POST['lastname']);
+    $email = stripcslashes($_POST['email']);
+    $firstname = stripcslashes($_POST['firstname']);
+    $lastname = stripcslashes($_POST['lastname']);
     $new_user_password = $_POST['new_user_password'];
-    $user_nice_name = strtolower($_POST['new_user_email']);
-    $nameur = strtolower($_POST['legalEntity']);
-    $phone = strtolower($_POST['phone']);
-    $adress = strtolower($_POST['address']);
-    $adress = strtolower($_POST['taxId']);
-    $iban = strtolower($_POST['iban']);
     $user_data = array(
-        'user_login' => $new_user_name,
-        'first_name' => $first_name,
-        'last_name' => $last_name,
+        'user_login' => $email,
+        'firstname' => $firstname,
+        'last_name' => $lastname,
         'user_pass' => $new_user_password,
-        'user_nicename' => $user_nice_name,
-        'nameur' => $nameur,
-        'phone' => $phone,
-        'adress' => $adress,
-        //'ynp' => $ynp,
-        'iban' => $iban,
         'role' => 'subscriber'
     );
     $user_id = wp_insert_user($user_data);
     if (!is_wp_error($user_id)) {
-        update_user_meta($user_id, 'nameur', $_POST['nameur']);
-        update_user_meta($user_id, 'phone', $_POST['phone']);
-        update_user_meta($user_id, 'adress', $_POST['adress']);
-        update_user_meta($user_id, 'ynp', $_POST['ynp']);
-        update_user_meta($user_id, 'iban', $_POST['iban']);
+        update_user_meta($user_id, 'profile_legal_entity', $_POST['legalEntity']);
+        update_user_meta($user_id, 'profile_phone', $_POST['phone']);
+        update_user_meta($user_id, 'profile_address', $_POST['address']);
+        update_user_meta($user_id, 'profile_tax_id', $_POST['taxId']);
+        update_user_meta($user_id, 'profile_iban', $_POST['iban']);
 
         // Почта сервера и админа должна совпадать!
         $rand = rand(0000, 9999);
         $subject = 'Код верификации на сайте OneDuck';
-        $message = 'Здравствуйте, '.$first_name.'! Ваш код верификации: '.$rand.'';
-        $headers = 'From: <info@wasd.kz>'."\r\n";
-        wp_mail($new_user_name, $subject, $message, $headers);
+        $message = 'Здравствуйте, '.$firstname.'! Ваш код верификации: '.$rand.'';
+        wp_mail($email, $subject, $message);
         echo $rand;
 
     } else {
